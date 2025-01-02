@@ -1,0 +1,14 @@
+import { useState } from "react";
+
+const useAccessibility = () => {
+  const [contrast, setContrast] = useState(false);
+
+  const toggleContrast = () => {
+    setContrast(!contrast);
+    document.body.classList.toggle("high-contrast", !contrast);
+  };
+
+  return { contrast, toggleContrast };
+};
+
+export default useAccessibility;

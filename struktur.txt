@@ -1,0 +1,92 @@
+/accessibility-plugin
+│
+├── accessibility-plugin.php            # Hauptdatei des WordPress-Plugins (Einbindung in WP)
+├── uninstall.php                       # Datei, um Plugin-Daten beim Deinstallieren zu entfernen
+├── wpml-config.xml                     # Konfigurationsdatei für WPML-Integration (Multilingual Plugin)
+├── readme.txt                          # Beschreibung und Details für das WordPress-Plugin-Verzeichnis
+├── struktur.txt                        # Datei mit der Strukturübersicht
+│
+├── /public                             # Öffentlich zugängliche Dateien (für Vite und Tests)
+│   ├── index.html                      # Einstiegspunkt für Vite
+│   ├── vite.svg                        # Vite-Icon
+│   ├── favicon.ico                     # Plugin-Icon
+│
+├── /src                                # React-Quellcode und Vite-Projektstruktur
+│   ├── /assets                         # Statische Dateien (CSS, Bilder, Icons)
+│   │   ├── AccessibilityButton.css     # CSS für den Accessibility-Button
+│   │   ├── App.css                     # Styling für die gesamte App
+│   │   ├── toolbar.scss                # Styling für die Toolbar
+│   │   ├── contrast.scss               # Styling für Kontrastumschaltung
+│   │   ├── reader.scss                 # Styling für die Vorlesefunktion
+│   │   ├── analysis.scss               # Styling für Analyseergebnisse
+│   │   ├── fonts/                      # Schriftarten (optional)
+│   │   ├── react.svg                   # React-Logo (statisch)
+│   │
+│   ├── /components                     # React-Komponenten
+│   │   ├── AccessibilityButton.jsx     # Beispielbutton für Barrierefreiheit
+│   │   ├── AccessibilityToolbar.jsx    # Haupt-Toolbar-Komponente
+│   │   ├── Toolbar.jsx                 # Toolbar-Komponente
+│   │   ├── ContrastSwitch.jsx          # Kontrastumschalter
+│   │   ├── FontResizer.jsx             # Schriftgrößenanpassung
+│   │   ├── SkipLinks.jsx               # Skiplinks-Komponente
+│   │   ├── ScreenReader.jsx            # Vorlesefunktion
+│   │   ├── AnalysisDashboard.jsx       # Dashboard für Analyseergebnisse
+│   │   ├── StatsWidget.jsx             # Statistikanzeige
+│   │   ├── ElementorIntegration.jsx    # Spezifische Funktionen für Elementor
+│   │
+│   ├── /hooks                          # Custom React-Hooks
+│   │   ├── useAccessibility.js         # Hook für Barrierefreiheitslogik
+│   │   ├── usePerformance.js           # Hook für Performance-Analyse
+│   │   ├── useWCAGChecker.js           # Hook für WCAG-Prüfungen
+│   │
+│   ├── App.jsx                         # Einstiegspunkt der React-App
+│   ├── main.jsx                        # React-Rendering mit Vite
+│   ├── index.css                       # Haupt-CSS-Datei mit Tailwind-Direktiven
+│
+├── /includes                           # PHP-Dateien für WordPress-Integration
+│   ├── accessibility-plugin.php        # Hauptdatei für die Integration des Plugins
+│   ├── /screenshots                    # Screenshots für Dokumentation oder Vorschau
+│   │   ├── plugin-preview.png          # Vorschau des Plugins
+│   │
+│   ├── class-enqueue-scripts.php       # Enqueue-Skripte für React-Build-Dateien
+│   ├── class-toolbar.php               # PHP-Integration der Toolbar
+│   ├── class-analysis.php              # Analysefunktionen (WCAG, Performance)
+│   ├── class-elementor-integration.php # Elementor-spezifische Funktionen
+│   ├── class-settings.php              # WordPress-Einstellungsseite
+│   ├── helper-functions.php            # Allgemeine Hilfsfunktionen
+│
+├── /api                                # PHP-Skripte für API-Logik
+│   ├── wcag-checker.php                # WCAG-Prüfungen
+│   ├── performance-checker.php         # Performance-Analyse
+│   ├── browser-compatibility.php       # Browserkompatibilitätstests
+│
+├── /dist                               # Produktionsbuild von Vite
+│   ├── assets/                         # Minifizierte JavaScript- und CSS-Dateien
+│   ├── index.html                      # Generierter Einstiegspunkt
+│
+├── /screenshots                        # Screenshots für WordPress.org oder Dokumentation
+│   ├── screenshot-1.png                # Haupt-Toolbar des Plugins
+│   ├── screenshot-2.png                # Beispiel für Kontrastfunktion
+│   ├── screenshot-3.png                # Analyse-Dashboard
+│
+├── /tests                              # Tests für React-Komponenten und Plugin-Funktionen
+│   ├── /unit                           # Unit-Tests
+│   │   ├── AccessibilityButton.test.jsx# Unit-Test für AccessibilityButton
+│   │   ├── Toolbar.test.jsx            # Test für Toolbar
+│   │
+│   ├── /integration                    # Integrationstests
+│   │   ├── AccessibilityFlow.test.jsx  # Test für Barrierefreiheitsprüfungen
+│
+├── /languages                          # Sprachdateien für Mehrsprachigkeit
+│   ├── accessibility-plugin-en_US.mo   # Englische Übersetzung (kompiliert)
+│   ├── accessibility-plugin-en_US.po   # Englische Übersetzungsquelle
+│   ├── accessibility-plugin-de_DE.mo   # Deutsche Übersetzung (kompiliert)
+│   ├── accessibility-plugin-de_DE.po   # Deutsche Übersetzungsquelle
+│
+├── tailwind.config.js                  # Tailwind-Konfigurationsdatei
+├── vite.config.js                      # Vite-Konfigurationsdatei
+├── eslint.config.js                    # ESLint-Konfiguration für Code-Qualität
+├── package.json                        # Abhängigkeiten für das Projekt
+├── package-lock.json                   # Lockfile für NPM-Abhängigkeiten
+├── .gitignore                          # Git-Ausnahmen
+├── README.md                           # Dokumentation für Entwickler

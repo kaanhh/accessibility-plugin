@@ -1,0 +1,10 @@
+[
+    {
+        "label": "Kontrast",
+        "icon": "contrastIcon",
+        "submenu":[
+            { "label": "Submenu 1" },
+            { "label": "Submenu 2" }
+        ]
+    }
+]

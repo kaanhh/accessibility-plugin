@@ -1,0 +1,208 @@
+.accessibility-plugin {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .accessibility-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 5rem;
+    width: 80px; 
+    height: 40px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 0; 
+  }
+  
+  .accessibility-button img {
+    max-width: 100%; 
+    max-height: 100%;
+  }
+
+  .accessibility-popup {
+    position: absolute; 
+    top: 60px; 
+    right: 0; 
+    width: 200px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    padding: 10px;
+  }
+  
+  .accessibility-popup button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .accessibility-popup button:hover {
+    background-color: #e0e0e0;
+  }
+/* Haupt-Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  -webkit-backdrop-filter: blur(8px); /* Für Safari */
+  pointer-events: none; /* Keine Interaktion mit dem Overlay */
+  z-index: 9999;
+  --spotlight-top: 50%; /* Standardposition */
+  --spotlight-height: 100px; /* Höhe des sichtbaren Bereichs */
+}
+
+/* Sichtbarer Bereich (Spotlight) */
+.overlay::before {
+  content: "";
+  position: absolute;
+  top: var(--spotlight-top); /* Dynamische Position */
+  left: 0;
+  width: 100%; /* Horizontaler Bereich */
+  height: var(--spotlight-height); /* Dynamische Höhe */
+  background: transparent; /* Kein Hintergrund für den sichtbaren Bereich */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); /* Abdunklung außerhalb des Bereichs */
+  z-index: 10000; /* Überlagerung */
+  backdrop-filter: none; 
+  -webkit-backdrop-filter: none; /* Kein Blur für Safari */
+  pointer-events: none; /* Keine Interaktion mit dem sichtbaren Bereich */
+  transition: top 0.1s ease-out; /* Sanfte Bewegung */
+}
+
+.caution-border {
+  border: 6px solid; 
+  border-image: repeating-linear-gradient(
+      45deg, 
+      blue, 
+      blue 10px,
+      white 10px, 
+      white 20px 
+  ) 1;
+  font-size: 12px; 
+  text-align: center; 
+}
+
+/* Popup für Shortcuts */
+.shortcut-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  max-width: 400px;
+  width: 90%;
+  text-align: left; /* Links ausrichten */
+}
+
+.shortcut-popup .popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.shortcut-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shortcut-popup li {
+  margin: 10px 0; /* Abstände zwischen den Listenelementen */
+}
+
+.shortcut-popup button.shortcut-item {
+  background: #007BFF;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: left; /* Text innerhalb der Buttons linksbündig ausrichten */
+}
+
+.shortcut-popup button.shortcut-item:hover {
+  background: #0056b3;
+}
+
+.accessibility-popup button:hover {
+  background-color: #e0e0e0; /* Bestehende Hintergrundfarbe */
+  border: 2px solid #3498db; /* Füge einen Rahmen hinzu */
+}
+
+/* Wrapper für den Kontrast-Button */
+.contrast-button-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px; /* Abstand zwischen Pfeil und Button */
+}
+
+/* Submenü-Trigger (Pfeil-Button) */
+.submenu-trigger {
+  position: absolute;
+  left: -30px; /* Links vom Button platzieren */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 105%; /* Standard: Nach links ausklappen */
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 150px; /* Feste Breite für die Desktop-Ansicht */
+}
+
+/* Submenü-Button */
+.submenu-button {
+  width: 100%; /* Submenu-Button nimmt die gesamte Submenu-Breite ein */
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap; /* Kein Umbruch im Text */
+}
+
+.submenu-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Mobilansicht */
+@media (max-width: 768px) {
+  .submenu {
+    position: static; /* Kein absolutes Positionieren */
+    margin-top: 5px; /* Abstand zum Hauptbutton */
+    box-shadow: none; /* Kein Schatten */
+    width: 100%; /* Breite des Submenus passt sich dem Hauptbutton an */
+  }
+}
