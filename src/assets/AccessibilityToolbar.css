@@ -153,7 +153,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px; /* Abstand zwischen Pfeil und Button */
+  gap: 10px;
 }
 
 /* Submenü-Trigger (Pfeil-Button) */
@@ -165,44 +165,46 @@
   cursor: pointer;
   font-size: 1rem;
 }
-
+/* Entfernen, wenn Submenu komplett entfernt wurde */
 .submenu {
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 0;
   left: auto;
-  right: 105%; /* Standard: Nach links ausklappen */
+  right: 105%;
   background: white;
   border: 1px solid #ddd;
   padding: 10px;
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 150px; /* Feste Breite für die Desktop-Ansicht */
+  width: 150px;
 }
 
-/* Submenü-Button */
 .submenu-button {
-  width: 100%; /* Submenu-Button nimmt die gesamte Submenu-Breite ein */
+  width: 100%;
   padding: 10px;
   background-color: #f0f0f0;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   text-align: left;
-  white-space: nowrap; /* Kein Umbruch im Text */
+  white-space: nowrap;
 }
 
 .submenu-button:hover {
   background-color: #e0e0e0;
 }
 
-/* Mobilansicht */
 @media (max-width: 768px) {
-  .submenu {
-    position: static; /* Kein absolutes Positionieren */
-    margin-top: 5px; /* Abstand zum Hauptbutton */
-    box-shadow: none; /* Kein Schatten */
-    width: 100%; /* Breite des Submenus passt sich dem Hauptbutton an */
+  .accessibility-popup {
+    width: 90%; /* Breite auf 90% des Viewports beschränken */
+    right: 5%; /* Zentrierung durch Einrückung */
+  }
+
+  .accessibility-button {
+    font-size: 3rem; /* Kleinere Schriftgröße für mobile Ansicht */
+    width: 60px; /* Kleinere Breite */
+    height: 30px; /* Kleinere Höhe */
   }
 }

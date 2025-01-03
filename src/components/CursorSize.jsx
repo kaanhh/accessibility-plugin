@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CursorSize = () => {
+const CursorSize = ({ icon }) => {
   const [isSpotlightActive, setIsSpotlightActive] = useState(false);
 
   const toggleSpotlight = () => {
@@ -34,10 +34,14 @@ const CursorSize = () => {
 
   return (
     <button
-      className="flex items-center p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
+      className="flex items-center justify-between p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
       onClick={toggleSpotlight}
     >
+      {/* Text */}
       {isSpotlightActive ? "Spotlight an" : "Spotlight"}
+
+      {/* Icon */}
+      {icon && <img src={icon} alt="Cursor Icon" className="w-15 h-16" />}
     </button>
   );
 };

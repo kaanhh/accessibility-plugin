@@ -2,13 +2,16 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './assets/App.css'
+import { AccessibilityProvider } from "./AccessibilityContext"; 
 import AccessibilityToolbar from "./AccessibilityToolbar";
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <AccessibilityProvider>
       <AccessibilityToolbar />
 
       <main id="main-content"></main>
@@ -41,7 +44,7 @@ function App() {
         </p>
         <a href="#">EIN LINK</a>
       </div>
-
+      </AccessibilityProvider>
     </>
   )
 }

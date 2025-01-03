@@ -1,57 +1,27 @@
-import { useState } from "react";
+import { useContext } from "react"; // useContext importieren
 import "../assets/contrast.css"; // Import der CSS-Datei
 import { contrastIcon } from "../assets"; // Icon importieren
+import { AccessibilityContext } from "../AccessibilityContext"; // Context importieren
 
-const ContrastSwitch = ({ menuItem, index, activeSubmenu, setActiveSubmenu }) => {
-  const [isContrastMode, setIsContrastMode] = useState(false);
-
-  const toggleContrastMode = () => {
-    setIsContrastMode((prevMode) => !prevMode);
-    if (!isContrastMode) {
-      document.body.classList.add("contrast-mode");
-    } else {
-      document.body.classList.remove("contrast-mode");
-    }
-  };
+const ContrastSwitch = () => {
+  // Zugriff auf den Context
+  const { isContrastMode, toggleContrastMode } = useContext(AccessibilityContext);
 
   return (
     <div className="menu-item">
       <button
-        className="flex items-center justify-between p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
-        onClick={toggleContrastMode}
+        className={`flex items-center justify-between p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200 ${
+          isContrastMode ? "contrast-active" : ""
+        }`} // Dynamische Klasse für aktiven Zustand
+        onClick={toggleContrastMode} // Context-Funktion für Umschalten des Kontrasts
       >
-        {/* Linker Bereich: Label und Dropdown-Pfeil */}
-        <span className="flex items-center">
-          {menuItem.label}
-          <span
-            className="dropdown-arrow ml-2"
-            onClick={(e) => {
-              e.stopPropagation(); // Verhindert Auslösen des Hauptbuttons
-              setActiveSubmenu(activeSubmenu === index ? null : index); // Öffnet/Schließt Submenu
-            }}
-          >
-            {activeSubmenu === index ? "▲" : "▼"}
-          </span>
-        </span>
-
-        {/* Rechter Bereich: Icon */}
+        <span>Kontrast umschalten</span>
         <img
           src={contrastIcon}
-          alt={`${menuItem.label} Icon`}
+          alt="Kontrast Icon"
           className="w-10 h-10"
         />
       </button>
-
-      {/* Submenu */}
-      {activeSubmenu === index && menuItem.submenu && (
-        <div className="submenu">
-          {menuItem.submenu.map((subItem, subIndex) => (
-            <button key={subIndex} className="submenu-button">
-              {subItem.label}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

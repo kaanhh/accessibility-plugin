@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const HighlightLink2 = () => {
+const HighlightLink2 = ({ icon }) => {
   const [highlightActive, setHighlightActive] = useState(false);
 
   const toggleHighlight = () => {
@@ -8,7 +8,7 @@ const HighlightLink2 = () => {
 
     // Fügt oder entfernt Tailwind-Klassen für alle Links
     const links = document.querySelectorAll("a");
-    links.forEach(link => {
+    links.forEach((link) => {
       if (!highlightActive) {
         link.classList.add(
           "border",
@@ -31,10 +31,14 @@ const HighlightLink2 = () => {
 
   return (
     <button
-      className="toolbar-button p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
+      className="toolbar-button flex justify-between text-lg items-center p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
       onClick={toggleHighlight}
     >
-      {highlightActive ? "Link an" : "Links aus"}
+      {/* Text */}
+      <span>{highlightActive ? "Link an" : "Links aus"}</span>
+
+      {/* Icon */}
+      {icon && <img src={icon} alt="Highlight Icon" className="w-10 h-10" />}
     </button>
   );
 };
