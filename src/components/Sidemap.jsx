@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react"; // useContext hinzugefügt
+import { AccessibilityContext } from "../AccessibilityContext"; // Context importieren
 
 const Sidemap = ({ icon }) => {
-  const [isShortcutPopupOpen, setIsShortcutPopupOpen] = useState(false);
+  const { isShortcutPopupOpen, toggleShortcutPopup, resetShortcutPopup } =
+    useContext(AccessibilityContext); // Kontextfunktionen aus dem Context holen
   const [htmlStructure, setHtmlStructure] = useState([]);
 
-  const toggleShortcutPopup = () => {
-    setIsShortcutPopupOpen(!isShortcutPopupOpen);
+  // Funktion zum Öffnen/Schließen des Popups und Sammeln der Seitenstruktur
+  const handleShortcutPopupToggle = () => {
+    toggleShortcutPopup();
 
     if (!isShortcutPopupOpen) {
       const tags = ["main", "header", "section", "footer", "nav"];
@@ -29,7 +32,7 @@ const Sidemap = ({ icon }) => {
 
   const scrollToElement = (element) => {
     element.scrollIntoView({ behavior: "smooth", block: "center" });
-    setIsShortcutPopupOpen(false);
+    toggleShortcutPopup(); // Popup schließen
   };
 
   return (
@@ -37,7 +40,7 @@ const Sidemap = ({ icon }) => {
       {/* Sidemap-Button */}
       <button
         className="toolbar-button flex items-center justify-between p-2 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
-        onClick={toggleShortcutPopup}
+        onClick={handleShortcutPopupToggle} // Context-Funktion verwenden
       >
         Sidemap
         {icon && <img src={icon} alt="Sidemap Icon" className="w-15 h-11 ml-2" />}

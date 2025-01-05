@@ -7,9 +7,10 @@ import {
   CursorSize,
   menuData,
   Sidemap,
-  ResetButton
+  ResetButton,
+  ToggleImageButton, 
 } from "./components";
-import { linklink, focus, node, reset } from "./assets";
+import { linklink, focus, node, reset, image } from "./assets";
 import { AccessibilityContext } from "./AccessibilityContext";
 
 const AccessibilityToolbar = () => {
@@ -17,7 +18,14 @@ const AccessibilityToolbar = () => {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
 
   // Zugriff auf den Context
-  const { resetFontSize, resetContrastMode } = useContext(AccessibilityContext);
+  const {
+    resetFontSize,
+    resetContrastMode,
+    resetSpotlight,
+    resetHighlight,
+    resetShortcutPopup,
+    resetImageVisibility,
+  } = useContext(AccessibilityContext);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -26,6 +34,10 @@ const AccessibilityToolbar = () => {
   const handleReset = () => {
     resetFontSize(); // Schriftgröße zurücksetzen
     resetContrastMode(); // Kontrast zurücksetzen
+    resetSpotlight(); // Spotlight zurücksetzen
+    resetHighlight(); // Highlight zurücksetzen
+    resetShortcutPopup(); // Shortcut-Popup zurücksetzen
+    resetImageVisibility(); // Bilder einblenden
   };
 
   return (
@@ -36,14 +48,15 @@ const AccessibilityToolbar = () => {
 
       {isOpen && (
         <div className="accessibility-popup">
-        <div className="menu">
-          <ContrastSwitch />
-        </div>
+          <div className="menu">
+            <ContrastSwitch />
+          </div>
 
           <FontSizeControls />
           <HighlightLink2 icon={linklink} />
           <CursorSize icon={focus} />
           <Sidemap icon={node} />
+          <ToggleImageButton icon={image} /> 
           <ResetButton icon={reset} onClick={handleReset} />
         </div>
       )}

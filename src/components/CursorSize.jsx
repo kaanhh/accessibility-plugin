@@ -1,36 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { AccessibilityContext } from "../AccessibilityContext"; // Context importieren
 
 const CursorSize = ({ icon }) => {
-  const [isSpotlightActive, setIsSpotlightActive] = useState(false);
-
-  const toggleSpotlight = () => {
-    setIsSpotlightActive(!isSpotlightActive);
-
-    // Overlay einfügen oder entfernen
-    if (!isSpotlightActive) {
-      const overlay = document.createElement("div");
-      overlay.className = "overlay";
-      overlay.id = "spotlight-overlay";
-      document.body.appendChild(overlay);
-
-      // Mausbewegung überwachen
-      document.addEventListener("mousemove", handleMouseMove);
-    } else {
-      const overlay = document.getElementById("spotlight-overlay");
-      if (overlay) overlay.remove();
-
-      // Mausbewegung stoppen
-      document.removeEventListener("mousemove", handleMouseMove);
-    }
-  };
-
-  const handleMouseMove = (event) => {
-    const overlay = document.getElementById("spotlight-overlay");
-    if (overlay) {
-      const mouseY = event.clientY;
-      overlay.style.setProperty("--spotlight-top", `${mouseY - 50}px`);
-    }
-  };
+  // Zugriff auf Spotlight-Funktionen und Status aus dem Context
+  const { isSpotlightActive, toggleSpotlight } = useContext(AccessibilityContext);
 
   return (
     <button
@@ -38,10 +11,10 @@ const CursorSize = ({ icon }) => {
       onClick={toggleSpotlight}
     >
       {/* Text */}
-      {isSpotlightActive ? "Spotlight an" : "Spotlight"}
+      <span>{isSpotlightActive ? "Spotlight an" : "Spotlight"}</span>
 
       {/* Icon */}
-      {icon && <img src={icon} alt="Cursor Icon" className="w-15 h-16" />}
+      {icon && <img src={icon} alt="Spotlight Icon" className="w-15 h-16" />}
     </button>
   );
 };
