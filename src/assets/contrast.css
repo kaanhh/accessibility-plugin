@@ -32,3 +32,25 @@ body.contrast-mode {
   background-color: #000;
   color: #fff; 
 }
+
+.submenu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%; /* Direkt unter dem Button */
+  left: 0;
+  z-index: 1000;
+  width: 100%; /* Gleiche Breite wie der Button */
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem;
+}

@@ -3,7 +3,14 @@ import { AccessibilityContext } from "../AccessibilityContext";
 
 const ResetButton = ({ icon, onClick }) => {
     // Kontext importieren
-    const { resetFontSize, resetContrastMode, resetSpotlight, resetHighlight } = useContext(AccessibilityContext);
+    const { 
+        resetFontSize, 
+        resetContrastMode, 
+        resetSpotlight, 
+        resetHighlight, 
+        resetBackgroundColor, // Funktion zum Zurücksetzen der Hintergrundfarbe
+        resetTextColor // Funktion zum Zurücksetzen der Schriftfarbe
+    } = useContext(AccessibilityContext);
 
     // HandleClick bleibt schlank und ruft die Funktionen auf
     const handleClick = () => {
@@ -18,6 +25,12 @@ const ResetButton = ({ icon, onClick }) => {
 
         // 4) Highlight-Links zurücksetzen
         resetHighlight();
+
+        // 5) Hintergrundfarbe zurücksetzen
+        resetBackgroundColor();
+
+        // 6) Schriftfarbe zurücksetzen
+        resetTextColor();
 
         // Optional: Wenn du zusätzlich das "onClick" aus der Toolbar
         // aufrufen willst (falls da noch etwas anderes drinsteckt):

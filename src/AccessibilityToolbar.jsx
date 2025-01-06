@@ -10,7 +10,7 @@ import {
   ResetButton,
   ToggleImageButton, 
 } from "./components";
-import { linklink, focus, node, reset, image } from "./assets";
+import { linklink, focus, node, reset, image , accessibilityIcon} from "./assets";
 import { AccessibilityContext } from "./AccessibilityContext";
 
 const AccessibilityToolbar = () => {
@@ -42,8 +42,16 @@ const AccessibilityToolbar = () => {
 
   return (
     <div className="accessibility-plugin">
-      <button className="accessibility-button" onClick={togglePopup}>
-        ♿
+      <button
+        className="accessibility-button p-2 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        onClick={togglePopup}
+        aria-label="Barrierefreiheitstool öffnen"
+      >
+        <img
+          src={accessibilityIcon}
+          alt="Barrierefreiheit Icon"
+          className="w-8 h-8"
+        />
       </button>
 
       {isOpen && (

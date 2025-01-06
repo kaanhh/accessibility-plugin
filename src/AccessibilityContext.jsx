@@ -11,13 +11,59 @@ export function AccessibilityProvider({ children }) {
   const [highlightActive, setHighlightActive] = useState(false);
   const [areImagesHidden, setAreImagesHidden] = useState(false);
   const [isShortcutPopupOpen, setIsShortcutPopupOpen] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState(""); // Hintergrundfarbe speichern
+  const [textColor, setTextColor] = useState(""); // Schriftfarbe speichern
 
+  // Schriftfarbe ändern und zurücksetzen
+  const changeTextColor = (color) => {
+    setTextColor((prevColor) => {
+      if (prevColor === color) {
+        // Wenn die gleiche Farbe ausgewählt wurde, Textfarbe zurücksetzen
+        document.body.style.color = ""; // Standardfarbe (z. B. Schwarz)
+        return ""; // Textfarbe zurücksetzen
+      } else {
+        // Textfarbe ändern
+        document.body.style.color = color;
+        return color;
+      }
+    });
+  };
+  
+
+  const resetTextColor = () => {
+    setTextColor(""); // Standardwert
+    document.body.style.color = ""; // Schriftfarbe zurücksetzen
+  };
+
+  // Hintergrundfarbe ändern und zurücksetzen
+  const changeBackgroundColor = (color) => {
+    setBackgroundColor((prevColor) => {
+      if (prevColor === color) {
+        // Wenn die gleiche Farbe ausgewählt wurde, Hintergrund zurücksetzen
+        document.body.style.backgroundColor = ""; // Standardfarbe
+        return ""; // Hintergrundfarbe zurücksetzen
+      } else {
+        // Hintergrundfarbe ändern
+        document.body.style.backgroundColor = color;
+        return color;
+      }
+    });
+  };
+
+  const resetBackgroundColor = () => {
+    setBackgroundColor(""); // Zurücksetzen
+    document.body.style.backgroundColor = ""; // Standardfarbe
+  };
+
+  // Shortcut Popup
   const toggleShortcutPopup = () => {
     setIsShortcutPopupOpen((prev) => !prev);
   };
   const resetShortcutPopup = () => {
     setIsShortcutPopupOpen(false);
   };
+
+  // Bildsichtbarkeit
   const toggleImageVisibility = () => {
     setAreImagesHidden((prev) => !prev);
   };
@@ -117,7 +163,7 @@ export function AccessibilityProvider({ children }) {
     }
   };
 
-  // Funktionen für Schriftgröße
+  // Schriftgröße
   const increaseFontSize = () => {
     setFontSize((prev) => Math.min(prev + 2, 32));
   };
@@ -130,7 +176,7 @@ export function AccessibilityProvider({ children }) {
     setFontSize(16);
   };
 
-  // Funktionen für Kontrast
+  // Kontrastmodus
   const toggleContrastMode = () => {
     setIsContrastMode((prev) => !prev);
   };
@@ -139,7 +185,7 @@ export function AccessibilityProvider({ children }) {
     setIsContrastMode(false);
   };
 
-  // Funktionen für Spotlight
+  // Spotlight
   const toggleSpotlight = () => {
     setIsSpotlightActive((prev) => !prev);
   };
@@ -148,7 +194,7 @@ export function AccessibilityProvider({ children }) {
     setIsSpotlightActive(false);
   };
 
-  // Funktionen für Highlight-Links
+  // Highlight-Links
   const toggleHighlight = () => {
     setHighlightActive((prev) => !prev);
   };
@@ -180,6 +226,12 @@ export function AccessibilityProvider({ children }) {
         areImagesHidden,
         toggleImageVisibility,
         resetImageVisibility,
+        backgroundColor,
+        changeBackgroundColor,
+        resetBackgroundColor,
+        textColor,
+        changeTextColor,
+        resetTextColor,
       }}
     >
       {children}
