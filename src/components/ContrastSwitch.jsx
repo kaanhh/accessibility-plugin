@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import "../assets/contrast.css";
 import { contrastIcon } from "../assets";
+import arrowIcon from "../assets/arrow.png";
 import { AccessibilityContext } from "../AccessibilityContext";
 
 const ContrastSwitch = () => {
@@ -35,9 +36,13 @@ const ContrastSwitch = () => {
             className={`mr-2 transform transition-transform ${
               isSubmenuOpen ? "rotate-180" : "rotate-0"
             }`}
-            onClick={toggleSubmenu} // Nur Submenü toggeln
+            onClick={toggleSubmenu}
           >
-            ▼
+            <img
+              src={arrowIcon}
+              alt="Submenü öffnen/schließen"
+              className="w-5 h-5"
+            />
           </span>
           Kontrast umschalten
         </span>

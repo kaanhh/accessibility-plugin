@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import { AccessibilityContext } from "../AccessibilityContext"; 
+import { FontSizeContext } from "../context/FontSizeContext"; // Import des FontSizeContext
 
 const ResetButton = ({ icon, onClick }) => {
-    // Kontext importieren
+    // Kontext aus beiden Contexts importieren
     const { 
-        resetFontSize, 
         resetContrastMode, 
         resetSpotlight, 
         resetHighlight, 
         resetBackgroundColor, // Funktion zum Zurücksetzen der Hintergrundfarbe
         resetTextColor // Funktion zum Zurücksetzen der Schriftfarbe
     } = useContext(AccessibilityContext);
+
+    const { resetFontSize } = useContext(FontSizeContext); // Schriftgröße aus FontSizeContext
 
     // HandleClick bleibt schlank und ruft die Funktionen auf
     const handleClick = () => {

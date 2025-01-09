@@ -28,7 +28,7 @@
     position: absolute; 
     top: 60px; 
     right: 0; 
-    width: 250px;
+    width: 300px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -208,3 +208,4 @@
     height: 30px; /* Kleinere Höhe */
   }
 }
+

@@ -14,7 +14,7 @@ const CursorSize = ({ icon }) => {
       <span>{isSpotlightActive ? "Spotlight an" : "Spotlight"}</span>
 
       {/* Icon */}
-      {icon && <img src={icon} alt="Spotlight Icon" className="w-15 h-16" />}
+      {icon && <img src={icon} alt="Spotlight Icon" className="w-10 h-10" />}
     </button>
   );
 };

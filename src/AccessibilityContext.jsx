@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect } from "react";
+import { FontSizeProvider } from "./context/FontSizeContext"; // Import des FontSizeProviders
 
 // 1. Context erstellen
 export const AccessibilityContext = createContext();
 
 // 2. Provider-Komponente
 export function AccessibilityProvider({ children }) {
-  const [fontSize, setFontSize] = useState(16);
   const [isContrastMode, setIsContrastMode] = useState(false);
   const [isSpotlightActive, setIsSpotlightActive] = useState(false);
   const [highlightActive, setHighlightActive] = useState(false);
@@ -13,37 +13,33 @@ export function AccessibilityProvider({ children }) {
   const [isShortcutPopupOpen, setIsShortcutPopupOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState(""); // Hintergrundfarbe speichern
   const [textColor, setTextColor] = useState(""); // Schriftfarbe speichern
+  const [isSettingsPopupOpen, setIsSettingsPopupOpen] = useState(false); // Status für Settings-Popup
 
   // Schriftfarbe ändern und zurücksetzen
   const changeTextColor = (color) => {
     setTextColor((prevColor) => {
       if (prevColor === color) {
-        // Wenn die gleiche Farbe ausgewählt wurde, Textfarbe zurücksetzen
-        document.body.style.color = ""; // Standardfarbe (z. B. Schwarz)
-        return ""; // Textfarbe zurücksetzen
+        document.body.style.color = "";
+        return "";
       } else {
-        // Textfarbe ändern
         document.body.style.color = color;
         return color;
       }
     });
   };
-  
 
   const resetTextColor = () => {
-    setTextColor(""); // Standardwert
-    document.body.style.color = ""; // Schriftfarbe zurücksetzen
+    setTextColor("");
+    document.body.style.color = "";
   };
 
   // Hintergrundfarbe ändern und zurücksetzen
   const changeBackgroundColor = (color) => {
     setBackgroundColor((prevColor) => {
       if (prevColor === color) {
-        // Wenn die gleiche Farbe ausgewählt wurde, Hintergrund zurücksetzen
-        document.body.style.backgroundColor = ""; // Standardfarbe
-        return ""; // Hintergrundfarbe zurücksetzen
+        document.body.style.backgroundColor = "";
+        return "";
       } else {
-        // Hintergrundfarbe ändern
         document.body.style.backgroundColor = color;
         return color;
       }
@@ -51,8 +47,8 @@ export function AccessibilityProvider({ children }) {
   };
 
   const resetBackgroundColor = () => {
-    setBackgroundColor(""); // Zurücksetzen
-    document.body.style.backgroundColor = ""; // Standardfarbe
+    setBackgroundColor("");
+    document.body.style.backgroundColor = "";
   };
 
   // Shortcut Popup
@@ -71,6 +67,27 @@ export function AccessibilityProvider({ children }) {
     setAreImagesHidden(false);
   };
 
+useEffect(() => {
+  const links = document.querySelectorAll("a");
+
+  if (highlightActive) {
+    links.forEach((link) => {
+      link.style.border = "2px solid yellow";
+      link.style.backgroundColor = "lightyellow";
+      link.style.borderRadius = "4px";
+      link.style.padding = "2px";
+    });
+  } else {
+    links.forEach((link) => {
+      link.style.border = "";
+      link.style.backgroundColor = "";
+      link.style.borderRadius = "";
+      link.style.padding = "";
+    });
+  }
+}, [highlightActive]);
+
+
   useEffect(() => {
     const images = document.querySelectorAll("img");
     images.forEach((img) => {
@@ -81,15 +98,6 @@ export function AccessibilityProvider({ children }) {
       }
     });
   }, [areImagesHidden]);
-
-  // Schriftgröße im DOM aktualisieren
-  useEffect(() => {
-    const content = document.querySelector(".main-content");
-    if (content) {
-      content.style.fontSize = `${fontSize}px`;
-      content.style.transition = "font-size 0.3s ease";
-    }
-  }, [fontSize]);
 
   // Kontrastmodus im DOM aktualisieren
   useEffect(() => {
@@ -105,24 +113,17 @@ export function AccessibilityProvider({ children }) {
     const overlayId = "spotlight-overlay";
 
     if (isSpotlightActive) {
-      // Overlay hinzufügen
       const overlay = document.createElement("div");
       overlay.className = "overlay";
       overlay.id = overlayId;
       document.body.appendChild(overlay);
-
-      // Mausbewegung überwachen
       document.addEventListener("mousemove", handleMouseMove);
     } else {
-      // Overlay entfernen
       const overlay = document.getElementById(overlayId);
       if (overlay) overlay.remove();
-
-      // Mausbewegung stoppen
       document.removeEventListener("mousemove", handleMouseMove);
     }
 
-    // Cleanup
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       const overlay = document.getElementById(overlayId);
@@ -130,31 +131,6 @@ export function AccessibilityProvider({ children }) {
     };
   }, [isSpotlightActive]);
 
-  // Highlight-Links aktualisieren
-  useEffect(() => {
-    const links = document.querySelectorAll("a");
-    links.forEach((link) => {
-      if (highlightActive) {
-        link.classList.add(
-          "border",
-          "border-yellow-400",
-          "bg-yellow-200",
-          "rounded",
-          "p-1"
-        );
-      } else {
-        link.classList.remove(
-          "border",
-          "border-yellow-400",
-          "bg-yellow-200",
-          "rounded",
-          "p-1"
-        );
-      }
-    });
-  }, [highlightActive]);
-
-  // Mausbewegung verfolgen
   const handleMouseMove = (event) => {
     const overlay = document.getElementById("spotlight-overlay");
     if (overlay) {
@@ -163,20 +139,6 @@ export function AccessibilityProvider({ children }) {
     }
   };
 
-  // Schriftgröße
-  const increaseFontSize = () => {
-    setFontSize((prev) => Math.min(prev + 2, 32));
-  };
-
-  const decreaseFontSize = () => {
-    setFontSize((prev) => Math.max(prev - 2, 12));
-  };
-
-  const resetFontSize = () => {
-    setFontSize(16);
-  };
-
-  // Kontrastmodus
   const toggleContrastMode = () => {
     setIsContrastMode((prev) => !prev);
   };
@@ -185,7 +147,6 @@ export function AccessibilityProvider({ children }) {
     setIsContrastMode(false);
   };
 
-  // Spotlight
   const toggleSpotlight = () => {
     setIsSpotlightActive((prev) => !prev);
   };
@@ -194,7 +155,6 @@ export function AccessibilityProvider({ children }) {
     setIsSpotlightActive(false);
   };
 
-  // Highlight-Links
   const toggleHighlight = () => {
     setHighlightActive((prev) => !prev);
   };
@@ -203,14 +163,17 @@ export function AccessibilityProvider({ children }) {
     setHighlightActive(false);
   };
 
-  // Den Context mit Werten füllen
+  const toggleSettingsPopup = () => {
+    setIsSettingsPopupOpen((prev) => !prev);
+  };
+
+  const resetSettingsPopup = () => {
+    setIsSettingsPopupOpen(false);
+  };
+
   return (
     <AccessibilityContext.Provider
       value={{
-        fontSize,
-        increaseFontSize,
-        decreaseFontSize,
-        resetFontSize,
         isContrastMode,
         toggleContrastMode,
         resetContrastMode,
@@ -232,9 +195,12 @@ export function AccessibilityProvider({ children }) {
         textColor,
         changeTextColor,
         resetTextColor,
+        isSettingsPopupOpen,
+        toggleSettingsPopup,
+        resetSettingsPopup,
       }}
     >
-      {children}
+      <FontSizeProvider>{children}</FontSizeProvider>
     </AccessibilityContext.Provider>
   );
 }

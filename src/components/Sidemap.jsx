@@ -43,7 +43,7 @@ const Sidemap = ({ icon }) => {
         onClick={handleShortcutPopupToggle} // Context-Funktion verwenden
       >
         Sidemap
-        {icon && <img src={icon} alt="Sidemap Icon" className="w-15 h-11 ml-2" />}
+        {icon && <img src={icon} alt="Sidemap Icon" className="w-10 h-10" />}
       </button>
 
       {/* Shortcuts-Popup */}

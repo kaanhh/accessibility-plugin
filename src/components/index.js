@@ -5,6 +5,6 @@ export { default as CursorSize } from "./CursorSize";
 export { default as Sidemap } from "./Sidemap";
 export { default as ResetButton } from "./ResetButton";
 export { default as ToggleImageButton } from "./ToggleImageButton";
-export { AccessibilityContext, AccessibilityProvider } from "../AccessibilityContext";
-
+export { default as Settings } from "./Settings";
 export { default as menuData } from "./menuData.json";
+export { default as Test } from "./Test";
